@@ -46,8 +46,9 @@ class MissedAuction:
                 ```
             2. check if remaining shares enough
                 1. if so, shares -= all needed
-                2. else, brute force en and poll?
+                2. else, brute force en and poll? Nah
                     1. if even not enough for 1 round:
+                        stops in the above `while` loop
                         result: [share, len(q) - 1] + remaining in pq
                     2. result: only those in pq
                         [1,2,3] 2

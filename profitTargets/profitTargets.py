@@ -37,7 +37,20 @@ class ProfitTargets:
 
         return res
 
+    def profit_targets2(self, profits, target) -> int:
+        res, comp = set(), set()
+        for i, p in enumerate(profits):
+            cur = target - p
+            if cur in comp:
+                ans = (p, cur) if p > cur else (cur, p)
+                if ans not in res:
+                    res.add(ans)
+            comp.add(p)
+        return len(res)
+
 
 if __name__ == '__main__':
     pt = ProfitTargets()
-    print(pt.profit_targets([3, 3, 5, 6, 6, 7, 9, 11, 13], 12))
+    assert pt.profit_targets2([3, 3, 5, 6, 6, 7, 9, 11, 13], 12) == 3
+    assert pt.profit_targets2([1, 3, 46, 1, 3, 9], 47) == 1
+    assert pt.profit_targets2([6, 6, 3, 9, 3, 5, 1], 12) == 2

@@ -46,7 +46,31 @@ class GlobalMax:
         dp.cache_clear()
         return self.maxv
 
+    def global_max2(self, arr: List[int], m: int) -> int:
+        def can_do(diff) -> bool:
+            cnt, prev = 1, arr[0]
+            for i in range(1, len(arr)):
+                if arr[i] - prev >= diff:
+                    cnt += 1
+                    if cnt == m:
+                        return True
+                    prev = arr[i]
+            return False
+
+        arr.sort()
+        s, e = arr[0], arr[-1]
+        res = 0
+        while s <= e:
+            mid = (s + e) // 2
+            if can_do(mid):
+                res = mid
+                s = mid + 1
+            else:
+                e = mid - 1
+
+        return res
+
 
 if __name__ == '__main__':
-    assert GlobalMax().global_max([2, 3, 5, 9], 3) == 3
-    assert GlobalMax().global_max([1, 2, 3, 4], 3) == 1
+    assert GlobalMax().global_max2([2, 3, 5, 9], 3) == 3
+    assert GlobalMax().global_max2([1, 2, 3, 4], 3) == 1

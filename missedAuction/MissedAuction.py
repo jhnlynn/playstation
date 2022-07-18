@@ -71,9 +71,9 @@ class MissedAuction:
                 while pq and pq[0][0] == top[0]:
                     q.append(heappop(pq))
             else:
-                if totalShares <= -top[0]:
+                if totalShares <= top[2]:
                     return sorted([i[3] for i in pq])
-                totalShares -= -top[0]
+                totalShares -= top[2]
             if q:
                 q.sort(key=lambda a: a[1])  # sort by timestamp
                 total = sum(q[i][2] for i in range(len(q)))
